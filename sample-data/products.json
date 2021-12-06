@@ -1,0 +1,23 @@
+{
+    "-Mq55vDoF7tf3sSvXIrv": {
+    "firebaseKey": "-Mq55vDoF7tf3sSvXIrv",
+      "name": "Coffee Maker",
+      "image": "Vasyutkin",
+      "description": "tvasyutkin0@ca.gov",
+      "price": "10"
+    },
+    "-Mq55vDpDpRQjBMVjFXI": {
+        "firebaseKey": "-Mq55vDpDpRQjBMVjFXI",
+      "name": "Clay Pot",
+      "image": "O'Loghlen",
+      "description": "sologhlen1@youtube.com",
+      "price": "2"
+    },
+    "-Mq55vDq9HGI1D4zRa8Q": {
+        "firebaseKey": "-Mq55vDq9HGI1D4zRa8Q",
+      "name": "Tea Spices",
+      "image": "Westberg",
+      "description": "hwestberg2@ox.ac.uk",
+      "price": "8"
+    }
+}
