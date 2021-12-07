@@ -1,35 +1,74 @@
 import React from 'react';
 import './NavBar.scss';
+import PropTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
+import { Button, ButtonGroup } from 'reactstrap';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import { signInUser, signOutUser } from '../api/auth';
 
-export default function NavBar() {
+export default function NavBar({ user }) {
   return (
-    <>
-      <div className="header">
-        <img
-          className="logo"
-          alt="search icon"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNxrCtxejReLBqJp2TG7fHcidHXbpIMDoBXQ&usqp=CAU"
-        />
-        <div className="search">
-          <input className="search-input" type="text" />
-          <SearchIcon className="search-icon" />
-        </div>
-        <div className="navigation">
-          <div className="options">
-            <span className="guest"> Hello Guest </span>
-            <span className="sign-in">Sign In</span>
-          </div>
-          <div className="options">
-            <span clasName="orders"> Orders </span>
-          </div>
-          <div className="cart">
-            <ShoppingBasketIcon />
-            <span className="cart-count">0</span>
-          </div>
-        </div>
+    <div className="header">
+      <img
+        className="logo"
+        alt="search icon"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNxrCtxejReLBqJp2TG7fHcidHXbpIMDoBXQ&usqp=CAU"
+        href="/"
+      />
+      <div className="search">
+        <input className="search-input" type="text" />
+        <SearchIcon className="search-icon" />
       </div>
-    </>
+      <ButtonGroup>
+        <Button type="button" href="/">
+          Home
+        </Button>
+        <Button type="button" href="/orders">
+          Orders
+        </Button>
+        {user ? (
+          <Button type="button" href="/paymentmethods">
+            Payment Methods
+          </Button>
+        ) : (
+          ''
+        )}
+        {user?.isAdmin && (
+          <Button type="button" href="/createproduct">
+            Create Product
+          </Button>
+        )}
+      </ButtonGroup>
+      <div className="cart" href="/cart">
+        <ShoppingBasketIcon />
+        <span className="cart-count">0</span>
+      </div>
+      {user ? (
+        <button
+          onClick={signOutUser}
+          className="btn btn-primary"
+          type="button"
+          href="/sign-in"
+        >
+          Sign Out
+        </button>
+      ) : (
+        <button
+          onClick={signInUser}
+          className="btn btn-secondary"
+          type="button"
+          href="/sign-in"
+        >
+          Sign In
+        </button>
+      )}
+    </div>
   );
 }
+
+NavBar.propTypes = {
+  user: PropTypes.shape(PropTypes.obj),
+};
+NavBar.defaultProps = {
+  user: null,
+};
