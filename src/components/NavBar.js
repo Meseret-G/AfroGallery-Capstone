@@ -21,7 +21,7 @@ export default function NavBar({ user }) {
       </div>
       <ButtonGroup>
         <Button type="button" href="/">
-          Home
+          Products
         </Button>
         <Button type="button" href="/orders">
           Orders
@@ -32,11 +32,6 @@ export default function NavBar({ user }) {
           </Button>
         ) : (
           ''
-        )}
-        {user?.isAdmin && (
-          <Button type="button" href="/createproduct">
-            Create Product
-          </Button>
         )}
       </ButtonGroup>
       <div className="cart" href="/cart">
