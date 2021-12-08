@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
-  Card, CardTitle, CardBody, Button,
+  Card,
+  CardTitle,
+  CardBody,
+  Button,
+  CardSubtitle,
+  CardImg,
 } from 'reactstrap';
 import { deleteProduct } from '../api/ProductData';
 
@@ -15,10 +20,12 @@ export default function ProductCard({ product, user, setProducts }) {
   return (
     <div className="products">
       <Card className="project-card">
+        <CardImg src={product.image} alt="product image" />
         <CardBody>
           <CardTitle className="card-title">{product.name}</CardTitle>
-          <CardTitle className="card-title">{product.description}</CardTitle>
-          <CardTitle className="card-title">{product.image}</CardTitle>
+          <CardSubtitle className="card-title">
+            {product.description}
+          </CardSubtitle>
           <CardTitle className="card-title">{product.price}</CardTitle>
           {user?.isAdmin && (
             <Link className="link" to={`/edit/${product.firebaseKey}`}>
