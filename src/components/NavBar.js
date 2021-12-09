@@ -2,13 +2,17 @@ import React from 'react';
 import './NavBar.scss';
 import PropTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
-import { Button, ButtonGroup } from 'reactstrap';
+import { Button, ButtonGroup, NavbarBrand } from 'reactstrap';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { signInUser, signOutUser } from '../api/auth';
 
 export default function NavBar({ user }) {
   return (
     <div className="header">
+      <NavbarBrand className="nav-logo" href="/">
+        {' '}
+        Habesha MiniMart{' '}
+      </NavbarBrand>
       <img
         className="logo"
         alt="search icon"
@@ -21,7 +25,7 @@ export default function NavBar({ user }) {
       </div>
       <ButtonGroup>
         <Button type="button" href="/">
-          Products
+          Home
         </Button>
         <Button type="button" href="/orders">
           Orders

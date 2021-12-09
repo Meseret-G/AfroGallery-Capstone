@@ -1,23 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { createProduct, updateProduct } from '../api/ProductData';
+import { useHistory, useParams } from 'react-router-dom';
+import {
+  createProduct,
+  getSingleProduct,
+  updateProduct,
+} from '../api/ProductData';
 
 const initialState = {
+  firebaseKey: '',
   name: '',
   image: '',
   description: '',
   price: '',
 };
-export default function ProductForm({ obj = {} }) {
+export default function ProductForm() {
   const [formInput, setFormInput] = useState(initialState);
   const history = useHistory();
+  const { key } = useParams();
 
   useEffect(() => {
-    if (obj.firebaseKey) {
-      setFormInput(obj);
+    if (key) {
+      getSingleProduct(key).then((obj) => {
+        setFormInput({
+          firebaseKey: obj.firebaseKey,
+          name: obj.name,
+          image: obj.image,
+          description: obj.description,
+          price: obj.price,
+        });
+      });
+    } else {
+      setFormInput(initialState);
     }
-  }, [obj]);
+  }, []);
 
   const handleChange = (e) => {
     setFormInput((prevState) => ({
@@ -26,12 +41,13 @@ export default function ProductForm({ obj = {} }) {
     }));
   };
   const resetForm = () => {
-    setFormInput(initialState);
+    setFormInput({ ...initialState });
   };
   const handleClick = (e) => {
     e.preventDefault();
-    if (obj.firebaseKey) {
+    if (key) {
       updateProduct(formInput).then(() => {
+        resetForm();
         history.push('/');
       });
     } else {
@@ -64,6 +80,7 @@ export default function ProductForm({ obj = {} }) {
             className="form-control"
             id="productImage"
             placeholder="Product Image"
+            required
           />
         </div>
         <div className="form-group">
@@ -86,19 +103,26 @@ export default function ProductForm({ obj = {} }) {
             className="form-control"
             id="productPrice"
             placeholder="Product Price"
+            required
           />
         </div>
         <button type="submit" className="btn btn-success">
-          Submit
+          {key ? 'Update' : 'Submit'}
         </button>
       </form>
     </div>
   );
 }
 
-ProductForm.propTypes = {
-  obj: PropTypes.shape({}),
-};
-ProductForm.defaultProps = {
-  obj: {},
-};
+// ProductForm.propTypes = {
+//   user: PropTypes.shape({
+//     firebaseKey: PropTypes.string,
+//     name: PropTypes.string,
+//     image: PropTypes.string,
+//     description: PropTypes.string,
+//     price: PropTypes.string,
+//   }),
+// };
+
+// ProductForm.defaultProps = {
+//   user: {} };

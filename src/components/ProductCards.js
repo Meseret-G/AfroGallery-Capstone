@@ -9,6 +9,7 @@ import {
   CardSubtitle,
   CardImg,
 } from 'reactstrap';
+import './ProductCard.scss';
 import { deleteProduct } from '../api/ProductData';
 
 export default function ProductCard({ product, user, setProducts }) {
@@ -19,7 +20,7 @@ export default function ProductCard({ product, user, setProducts }) {
   };
   return (
     <div className="products">
-      <Card className="project-card">
+      <Card style={{ width: '20rem' }} className="project-card">
         <CardImg src={product.image} alt="product image" />
         <CardBody>
           <CardTitle className="card-title">{product.name}</CardTitle>
