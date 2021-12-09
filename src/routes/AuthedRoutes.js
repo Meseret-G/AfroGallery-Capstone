@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import ProductView from '../views/ProductView';
 import OrdersView from '../views/OrdersView';
 import CartView from '../views/CartView';
+import SearchView from '../views/SearchView';
 
 export default function AuthedRoutes({ user }) {
   return (
@@ -13,6 +14,10 @@ export default function AuthedRoutes({ user }) {
       </Route>
       <Route exact path="/order" component={() => <OrdersView user={user} />} />
       <Route exact path="/cart" component={() => <CartView user={user} />} />
+      <Route exact path="/search">
+        {' '}
+        <SearchView />{' '}
+      </Route>
     </Switch>
   );
 }

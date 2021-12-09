@@ -30,6 +30,9 @@ export default function NavBar({ user }) {
         <Button type="button" href="/orders">
           Orders
         </Button>
+        <Button type="button" href="/search">
+          Search
+        </Button>
         {user ? (
           <Button type="button" href="/paymentmethods">
             Payment Methods
