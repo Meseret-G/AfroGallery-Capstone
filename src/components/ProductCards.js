@@ -12,7 +12,9 @@ import {
 import './ProductCard.scss';
 import { deleteProduct } from '../api/ProductData';
 
-export default function ProductCard({ product, user, setProducts }) {
+export default function ProductCard({
+  product, user, setProducts, onAdd,
+}) {
   const handleClick = (method) => {
     if (method === 'delete') {
       deleteProduct(product.firebaseKey).then((productArray) => setProducts(productArray));
@@ -27,7 +29,10 @@ export default function ProductCard({ product, user, setProducts }) {
           <CardSubtitle className="card-title">
             {product.description}
           </CardSubtitle>
-          <CardTitle className="card-title">{product.price}</CardTitle>
+          <CardTitle className="card-title">${product.price}</CardTitle>
+          <Button className="addtocart" onClik={() => onAdd(product)}>
+            Add To Cart
+          </Button>
           {user?.isAdmin && (
             <Link className="link" to={`/edit/${product.firebaseKey}`}>
               Edit
@@ -58,6 +63,7 @@ ProductCard.propTypes = {
     firebaseKey: PropTypes.string,
   }).isRequired,
   setProducts: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
   user: PropTypes.shape(PropTypes.obj),
 };
 

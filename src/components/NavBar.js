@@ -15,7 +15,7 @@ export default function NavBar({ user }) {
       </NavbarBrand>
       <img
         className="logo"
-        alt="search icon"
+        alt="logo"
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNxrCtxejReLBqJp2TG7fHcidHXbpIMDoBXQ&usqp=CAU"
         href="/"
       />
