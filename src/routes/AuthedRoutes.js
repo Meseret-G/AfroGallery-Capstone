@@ -9,15 +9,10 @@ import SearchView from '../views/SearchView';
 export default function AuthedRoutes({ user }) {
   return (
     <Switch>
-      <Route exact path="/" component={ProductView}>
-        {' '}
-      </Route>
+      <Route exact path="/" component={ProductView} />
       <Route exact path="/order" component={() => <OrdersView user={user} />} />
       <Route exact path="/cart" component={() => <CartView user={user} />} />
-      <Route exact path="/search">
-        {' '}
-        <SearchView />{' '}
-      </Route>
+      <Route exact path="/search" component={SearchView} />
     </Switch>
   );
 }

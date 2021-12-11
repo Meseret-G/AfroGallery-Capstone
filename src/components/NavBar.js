@@ -2,6 +2,7 @@ import React from 'react';
 import './NavBar.scss';
 import PropTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
+import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, NavbarBrand } from 'reactstrap';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { signInUser, signOutUser } from '../api/auth';
@@ -30,9 +31,7 @@ export default function NavBar({ user }) {
         <Button type="button" href="/orders">
           Orders
         </Button>
-        <Button type="button" href="/search">
-          Search
-        </Button>
+        <Link to="/search">Search</Link>
         <Button type="button" href="/basket">
           Basket
         </Button>
