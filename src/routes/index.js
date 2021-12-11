@@ -7,9 +7,14 @@ import AuthedRoutes from './AuthedRoutes';
 export default function Routes({ user }) {
   return (
     <div>
-      {user?.isAdmin && <AdminRoutes user={user} />}
-      <AuthedRoutes user={user} />
-      <NonAuthedRoutes user={user} />
+      {user?.isAdmin ? (
+        <AdminRoutes user={user} />
+      ) : (
+        <>
+          <AuthedRoutes user={user} />
+          <NonAuthedRoutes user={user} />
+        </>
+      )}
     </div>
   );
 }

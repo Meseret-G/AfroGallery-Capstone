@@ -15,16 +15,13 @@ export default function AdminRoutes({ user }) {
       <Route exact path="/createproduct">
         <ProductForm user={user} />
       </Route>
-      <Route exact path="/search">
-        <SearchView />
-      </Route>
+      <Route exact path="/search" component={SearchView} />
     </Switch>
   );
 }
 
 AdminRoutes.propTypes = {
   user: PropTypes.shape(PropTypes.obj),
-  //   cartItems: PropTypes.func.isRequired,
 };
 
 AdminRoutes.defaultProps = {

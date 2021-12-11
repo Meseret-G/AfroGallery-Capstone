@@ -3,7 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import Routes from '../routes';
 import NavBar from '../components/NavBar';
-import ProductView from '../views/ProductView';
+// import ProductView from '../views/ProductView';
 
 function Initialize() {
   const [user, setUser] = useState(null);
@@ -25,7 +25,7 @@ function Initialize() {
   return (
     <div className="app">
       <NavBar user={user} />
-      <ProductView user={user} />
+      {/* <ProductView user={user} /> */}
       <Routes user={user} />
     </div>
   );
