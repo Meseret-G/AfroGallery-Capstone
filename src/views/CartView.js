@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Cart from '../components/Cart';
 
 export default function CartView() {
-  //   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
   const onAdd = (product) => {
     const exist = cartItems.find(

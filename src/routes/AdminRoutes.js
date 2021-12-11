@@ -5,6 +5,8 @@ import { Route, Switch } from 'react-router-dom';
 // import ProductView from '../views/ProductView';
 import ProductForm from '../components/ProductForm';
 import EditProduct from '../components/EditProduct';
+// import CartView from '../views/CartView';
+// import OrdersView from '../views/OrdersView';
 
 export default function AdminRoutes({ user }) {
   return (
@@ -21,6 +23,7 @@ export default function AdminRoutes({ user }) {
 
 AdminRoutes.propTypes = {
   user: PropTypes.shape(PropTypes.obj),
+  //   cartItems: PropTypes.func.isRequired,
 };
 
 AdminRoutes.defaultProps = {
