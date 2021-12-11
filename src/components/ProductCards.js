@@ -23,14 +23,18 @@ export default function ProductCard({
   return (
     <div className="products">
       <Card style={{ width: '20rem' }} className="project-card">
-        <CardImg src={product.image} alt="product image" />
+        <CardImg
+          src={product.image}
+          alt="product image"
+          className="product-image"
+        />
         <CardBody>
           <CardTitle className="card-title">{product.name}</CardTitle>
-          <CardSubtitle className="card-title">
+          <CardSubtitle className="card-description">
             {product.description}
           </CardSubtitle>
-          <CardTitle className="card-title">${product.price}</CardTitle>
-          <Button className="addtocart" onClik={() => onAdd(product)}>
+          <CardTitle className="card-price">${product.price}</CardTitle>
+          <Button className="add-cart" onClick={onAdd} product={product}>
             Add To Cart
           </Button>
           {user?.isAdmin && (

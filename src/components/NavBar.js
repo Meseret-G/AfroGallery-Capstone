@@ -33,6 +33,9 @@ export default function NavBar({ user }) {
         <Button type="button" href="/search">
           Search
         </Button>
+        <Button type="button" href="/basket">
+          Basket
+        </Button>
         {user ? (
           <Button type="button" href="/paymentmethods">
             Payment Methods

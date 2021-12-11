@@ -10,10 +10,12 @@ export default function Cart({ cartItems, onAdd, onRemove }) {
 
   return (
     <>
-      <div>{cartItems.length === 0 && <div> Cart is Empty</div>}</div>
+      <div className="cart-items-header"> Your Shopping Cart </div>
+      {cartItems.length === 0 && <div> Cart is Empty</div>}
 
       {cartItems.map((item) => (
-        <div key={item.firebaseKe}>
+        <div key={item.firebaseKey}>
+          <img src={item.img} alt="product-pic" />
           <div>{item.name}</div>
           <div>
             <button type="button" onClick={() => onAdd(item)} className="add">
