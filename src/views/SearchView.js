@@ -35,6 +35,7 @@ export default function SearchView() {
             aria-label="Search-by-name"
             onChange={(e) => {
               setSearchProduct(e.target.value);
+              e.preventDefault();
             }}
           />
           <Button variant="outline-success">Search</Button>
