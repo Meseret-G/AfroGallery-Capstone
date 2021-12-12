@@ -1,45 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import Data from '../../sample-data/Data';
 
-export default function Cart({ cartItems, onAdd, onRemove }) {
-  const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0);
-  const taxPrice = itemsPrice * 0.09;
-  const ShippingPrice = itemsPrice > 500 ? 0 : 10;
-  const totalPrice = itemsPrice + taxPrice + ShippingPrice;
+export default function Cart({ cartProducts, onAdd, onRemove }) {
+  const productPrice = cartProducts.reduce(
+    (a, c) => a + c.quantity * c.price,
+    0,
+  );
+  const taxPrice = productPrice * 0.09;
+  const shippingPrice = productPrice > 500 ? 0 : 10;
+  const totalPrice = productPrice + taxPrice + shippingPrice;
+  console.warn(cartProducts);
 
   return (
     <>
       <div className="cart-items-header"> Your Shopping Cart </div>
-      {cartItems.length === 0 && <div> Cart is Empty</div>}
+      {cartProducts.length === 0 && <div> Cart is Empty</div>}
 
-      {cartItems.map((item) => (
-        <div key={item.firebaseKey}>
-          <img src={item.img} alt="product-pic" />
-          <div>{item.name}</div>
+      {cartProducts.map((product) => (
+        <div key={product.firebaseKey}>
+          <img src={product.img} alt="product-pic" />
+          <div>{product.name}</div>
+          <div>{product.name}</div>
           <div>
-            <button type="button" onClick={() => onAdd(item)} className="add">
+            <button
+              type="button"
+              onClick={() => onAdd(product)}
+              className="add"
+            >
               +
             </button>
             <button
               type="button"
-              onClick={() => onRemove(item)}
+              onClick={() => onRemove(product)}
               className="remove"
             >
               -
             </button>
           </div>
           <div>
-            {item.quantity} x ${item.price.toFixed(2)}
+            {product.quantity} x ${product.price.toFixed(2)}
           </div>
         </div>
       ))}
-      {cartItems.length !== 0 && (
+      {cartProducts.length !== 0 && (
         <>
           <hr />
           <div className="price-container">
             <div className="price"> Items Price </div>
-            <div> {itemsPrice.toFixed(2)} </div>
+            <div> {productPrice.toFixed(2)} </div>
           </div>
           <div className="tax-container">
             <div className="tax"> Tax Price </div>
@@ -47,7 +55,19 @@ export default function Cart({ cartItems, onAdd, onRemove }) {
           </div>
           <div className="total-container">
             <div className="shipping"> Shipping Price </div>
-            <div> {totalPrice.toFixed(2)} </div>
+            <div> {shippingPrice.toFixed(2)} </div>
+          </div>
+          <div className>
+            <div>
+              <strong>Total Price</strong>
+            </div>
+            <div>
+              <strong>${totalPrice.toFixed(2)}</strong>
+            </div>
+          </div>
+          <hr />
+          <div>
+            <button type="submit">Checkout</button>
           </div>
         </>
       )}

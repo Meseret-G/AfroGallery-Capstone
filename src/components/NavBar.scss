@@ -44,14 +44,21 @@
     margin-left: 10px;
     margin-right: 10px;
 }
-.navigation {
+// .nav-options {
+//     display: flex;
+//     justify-content: space-evenly;
+//     justify-content: space-between;
+
+// }
+.nav-options {
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
-}
-.options {
-    display: flex;
-    flex-direction: column;
-    margin-left: 10px;
-    margin-right: 10px;
-    color: white;
+    padding: 14px 30px;
+    color:antiquewhite;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin:0;
 }
