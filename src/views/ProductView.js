@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { getProducts } from '../api/ProductData';
 import ProductCard from '../components/ProductCards';
 
-export default function ProductView({ user }) {
+export default function ProductView({ user, onAdd }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ export default function ProductView({ user }) {
             product={product}
             setProducts={setProducts}
             user={user}
+            onAdd={onAdd}
           />
         ))}
       </>
@@ -35,6 +36,7 @@ export default function ProductView({ user }) {
 }
 ProductView.propTypes = {
   user: PropTypes.shape(PropTypes.obj),
+  onAdd: PropTypes.func.isRequired,
 };
 ProductView.defaultProps = {
   user: null,

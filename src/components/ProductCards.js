@@ -34,7 +34,7 @@ export default function ProductCard({
             {product.description}
           </CardSubtitle>
           <CardTitle className="card-price">${product.price}</CardTitle>
-          <Button className="add-cart" onClick={onAdd} product={product}>
+          <Button className="add-cart" onClick={() => onAdd(product)}>
             Add To Cart
           </Button>
           {user?.isAdmin && (
@@ -67,8 +67,8 @@ ProductCard.propTypes = {
     firebaseKey: PropTypes.string,
   }).isRequired,
   setProducts: PropTypes.func.isRequired,
-  onAdd: PropTypes.func.isRequired,
   user: PropTypes.shape(PropTypes.obj),
+  onAdd: PropTypes.func.isRequired,
 };
 
 ProductCard.defaultProps = {

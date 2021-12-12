@@ -1,33 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cart from '../components/Cart';
+import { getSingleProduct } from '../api/ProductData';
 
 export default function CartView() {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartProducts, setCartProducts] = useState([]);
+  console.warn(cartProducts);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      getSingleProduct().then(cartProducts);
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const onAdd = (product) => {
-    const exist = cartItems.find(
+    const exist = cartProducts.find(
       (item) => item.firebaseKey === product.firebaseKey,
     );
     if (exist) {
-      setCartItems(
-        cartItems.map((item) => (item.firebaseKey === product.firebaseKey
+      setCartProducts(
+        cartProducts.map((item) => (item.firebaseKey === product.firebaseKey
           ? { ...exist, quantity: exist.quantity + 1 }
           : item)),
       );
     } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      setCartProducts([...cartProducts, { ...product, quantity: 1 }]);
     }
   };
   const onRemove = (product) => {
-    const exist = cartItems.find(
+    const exist = cartProducts.find(
       (item) => item.firebaseKey === product.firebaseKey,
     );
     if (exist.quantity === 1) {
-      setCartItems(
-        cartItems.filter((item) => item.firebaseKey !== product.firebaseKey),
+      setCartProducts(
+        cartProducts.filter((item) => item.firebaseKey !== product.firebaseKey),
       );
     } else {
-      setCartItems(
-        cartItems.map((item) => (item.firebaseKey === product.firebaseKey
+      setCartProducts(
+        cartProducts.map((item) => (item.firebaseKey === product.firebaseKey
           ? { ...exist, quantity: exist.quantity - 1 }
           : item)),
       );
@@ -36,7 +49,7 @@ export default function CartView() {
 
   return (
     <div>
-      <Cart cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
+      <Cart cartProducts={cartProducts} onAdd={onAdd} onRemove={onRemove} />
     </div>
   );
 }
