@@ -9,7 +9,6 @@ export default function Cart({ cartProducts, onAdd, onRemove }) {
   const taxPrice = productPrice * 0.09;
   const shippingPrice = productPrice > 500 ? 0 : 10;
   const totalPrice = productPrice + taxPrice + shippingPrice;
-  console.warn(cartProducts);
 
   return (
     <>

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import firebase from 'firebase/app';
 import { Link } from 'react-router-dom';
 import {
   Card,
@@ -9,12 +10,20 @@ import {
   CardSubtitle,
   CardImg,
 } from 'reactstrap';
+import firebaseConfig from '../api/apiKeys';
 import './ProductCard.scss';
 import { deleteProduct } from '../api/ProductData';
 
-export default function ProductCard({
-  product, user, setProducts, onAdd,
-}) {
+export default function ProductCard({ product, setProducts, onAdd }) {
+  const [admin, setAdmin] = useState(false);
+  const getCurrentUsersUid = () => firebase.auth().currentUser?.uid;
+
+  if (getCurrentUsersUid() === firebaseConfig.adminUid) {
+    setAdmin(true);
+  } else {
+    setAdmin(false);
+  }
+
   const handleClick = (method) => {
     if (method === 'delete') {
       deleteProduct(product.firebaseKey).then((productArray) => setProducts(productArray));
@@ -37,12 +46,12 @@ export default function ProductCard({
           <Button className="add-cart" onClick={() => onAdd(product)}>
             Add To Cart
           </Button>
-          {user?.isAdmin && (
+          {admin && (
             <Link className="link" to={`/edit/${product.firebaseKey}`}>
               Edit
             </Link>
           )}
-          {user?.isAdmin && (
+          {admin && (
             <Button
               className="delete-product"
               type="button"
@@ -67,10 +76,5 @@ ProductCard.propTypes = {
     firebaseKey: PropTypes.string,
   }).isRequired,
   setProducts: PropTypes.func.isRequired,
-  user: PropTypes.shape(PropTypes.obj),
   onAdd: PropTypes.func.isRequired,
-};
-
-ProductCard.defaultProps = {
-  user: null,
 };

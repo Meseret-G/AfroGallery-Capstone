@@ -6,6 +6,7 @@ import NavBar from '../components/NavBar';
 
 function Initialize() {
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
       if (authed) {
@@ -17,10 +18,11 @@ function Initialize() {
         };
         setUser(userObject);
       } else if (user || user === null) {
-        setUser(null);
+        setUser(false);
       }
     });
   }, []);
+
   return (
     <div className="app">
       <NavBar user={user} />

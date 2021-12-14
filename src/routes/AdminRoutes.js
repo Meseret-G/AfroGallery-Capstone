@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+
 import { Route, Switch } from 'react-router-dom';
+
 import SearchView from '../views/SearchView';
 import ProductView from '../views/ProductView';
 import ProductForm from '../components/ProductForm';
@@ -12,7 +14,7 @@ export default function AdminRoutes({ user }) {
     <Switch>
       <Route exact path="/" component={ProductView} user={user} />
       <Route exact path="/edit/:key">
-        <EditProduct user={user} />
+        <EditProduct />
       </Route>
       <Route exact path="/createproduct">
         <ProductForm user={user} />
