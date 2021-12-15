@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
   Card,
   CardTitle,
@@ -11,10 +11,41 @@ import {
 } from 'reactstrap';
 import './ProductCard.scss';
 import { deleteProduct } from '../api/ProductData';
+import { createOrder, getSingleOrder } from '../api/OrderData';
 
-export default function ProductCard({
-  product, user, setProducts, onAdd,
-}) {
+const initialState = {
+  firebaseKey: '',
+  uid: '',
+  name: '',
+  image: '',
+  description: '',
+  price: '',
+};
+export default function ProductCard({ product, setProducts, admin }) {
+  const [order, setOrder] = useState(initialState);
+  const { key } = useParams();
+
+  useEffect(() => {
+    if (key) {
+      getSingleOrder(key).then((obj) => {
+        setOrder({
+          uid: obj.uid,
+          date: obj.date,
+          name: obj.name,
+          image: obj.image,
+          description: obj.description,
+          price: obj.price,
+        });
+      });
+    }
+  }, []);
+
+  const addToCart = () => {
+    createOrder(order, product.firebaseKey).then(() => {
+      setOrder();
+    });
+  };
+
   const handleClick = (method) => {
     if (method === 'delete') {
       deleteProduct(product.firebaseKey).then((productArray) => setProducts(productArray));
@@ -34,15 +65,15 @@ export default function ProductCard({
             {product.description}
           </CardSubtitle>
           <CardTitle className="card-price">${product.price}</CardTitle>
-          <Button className="add-cart" onClick={() => onAdd(product)}>
+          <Button className="add-cart" onClick={() => addToCart()}>
             Add To Cart
           </Button>
-          {user?.isAdmin && (
+          {admin && (
             <Link className="link" to={`/edit/${product.firebaseKey}`}>
               Edit
             </Link>
           )}
-          {user?.isAdmin && (
+          {admin && (
             <Button
               className="delete-product"
               type="button"
@@ -67,10 +98,9 @@ ProductCard.propTypes = {
     firebaseKey: PropTypes.string,
   }).isRequired,
   setProducts: PropTypes.func.isRequired,
-  user: PropTypes.shape(PropTypes.obj),
-  onAdd: PropTypes.func.isRequired,
+  admin: PropTypes.shape(PropTypes.obj),
 };
 
 ProductCard.defaultProps = {
-  user: null,
+  admin: null,
 };

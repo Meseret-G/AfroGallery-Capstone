@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Orders() {
+export default function Revenue() {
   return (
     <div>
-      <h5>Order Page</h5>
+      <h> Revenue Page </h>
     </div>
   );
 }
