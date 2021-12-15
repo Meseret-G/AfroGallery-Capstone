@@ -1,4 +1,5 @@
 import axios from 'axios';
+import firebase from 'firebase/app';
 import firebaseConfig from './apiKeys';
 
 const dbUrl = firebaseConfig.databaseURL;
@@ -9,6 +10,8 @@ const dbUrl = firebaseConfig.databaseURL;
 //     .then((response) => resolve(Object.values(response.data)))
 //     .catch(reject);
 // });
+
+const getCurrentUsersUid = () => firebase.auth().currentUser?.uid;
 
 const getProducts = async () => {
   const product = await axios.get(`${dbUrl}/Products.json`);
@@ -56,4 +59,5 @@ export {
   createProduct,
   updateProduct,
   getSingleProduct,
+  getCurrentUsersUid,
 };
