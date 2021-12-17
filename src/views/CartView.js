@@ -1,48 +1,48 @@
 import React, { useState, useEffect } from 'react';
+import { getOrders } from '../api/OrderData';
 import Cart from '../components/Cart';
-
-import { getSingleOrder } from '../api/OrderData';
+import ProductCard from '../components/ProductCards';
 
 export default function CartView() {
   const [cartProducts, setCartProducts] = useState([]);
-  console.warn(cartProducts);
-
+  const [products, setProducts] = useEffect([]);
+  console.warn(setProducts);
   useEffect(() => {
     let isMounted = true;
-    if (isMounted) {
-      getSingleOrder().then(setCartProducts);
-    }
+    getOrders().then((orderArray) => {
+      if (isMounted) setCartProducts(orderArray);
+    });
     return () => {
       isMounted = false;
     };
   }, []);
 
-  const onAdd = (product) => {
-    const exist = cartProducts.find(
+  const addProduct = (product) => {
+    const productExist = cartProducts.find(
       (item) => item.firebaseKey === product.firebaseKey,
     );
-    if (exist) {
+    if (productExist) {
       setCartProducts(
         cartProducts.map((item) => (item.firebaseKey === product.firebaseKey
-          ? { ...exist, quantity: exist.quantity + 1 }
+          ? { ...productExist, quantity: productExist.quantity + 1 }
           : item)),
       );
     } else {
       setCartProducts([...cartProducts, { ...product, quantity: 1 }]);
     }
   };
-  const onRemove = (product) => {
-    const exist = cartProducts.find(
+  const removeProduct = (product) => {
+    const productExist = cartProducts.find(
       (item) => item.firebaseKey === product.firebaseKey,
     );
-    if (exist.quantity === 1) {
+    if (productExist.quantity === 1) {
       setCartProducts(
         cartProducts.filter((item) => item.firebaseKey !== product.firebaseKey),
       );
     } else {
       setCartProducts(
         cartProducts.map((item) => (item.firebaseKey === product.firebaseKey
-          ? { ...exist, quantity: exist.quantity - 1 }
+          ? { ...productExist, quantity: productExist.quantity - 1 }
           : item)),
       );
     }
@@ -50,7 +50,16 @@ export default function CartView() {
 
   return (
     <div>
-      <Cart cartProducts={cartProducts} onAdd={onAdd} onRemove={onRemove} />
+      <ProductCard
+        products={products}
+        addProduct={addProduct}
+        removeProduct={removeProduct}
+      />
+      <Cart
+        cartProducts={cartProducts}
+        addProduct={addProduct}
+        removeProduct={removeProduct}
+      />
     </div>
   );
 }
