@@ -15,3 +15,7 @@ This app was created for online store admin to be able CRUD on products and upda
 8. As a user, I want to update existing payment method and/or create a new payment method.
 9. As an admin, I want to CRUD on products and update the shipment status of orders.
 10. As an admin, I want to read the revenue report by date range.
+
+#ERD
+
+![image](https://user-images.githubusercontent.com/86808221/146630022-82c9a971-fb3d-42ab-bbd8-157bac37524f.png)

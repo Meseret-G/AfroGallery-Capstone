@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Cart({ order, onAdd, onRemove }) {
-  console.warn(order);
   const itemPrice = order.reduce((a, c) => a + c.quantity * c.price, 0);
   const taxPrice = itemPrice * 0.14;
   const shippingPrice = itemPrice > 2000 ? 0 : 20;
