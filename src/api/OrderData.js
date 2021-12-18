@@ -38,6 +38,26 @@ const addProductToCart = (orderfbKey, productfbKey) => new Promise((resolve, rej
     });
 });
 
+const updateOrderQuantity = (productfbKey, quantity) => new Promise((resolve, reject) => {
+  getSingleOrder(productfbKey).then((order) => {
+    axios
+      .patch(`${dbUrl}/orders/${productfbKey}.json`, { quantity })
+      .then(() => {
+        resolve(order.orderfbKey);
+      })
+      .catch(reject);
+  });
+});
+const removeOrder = (productfbKey) => new Promise((resolve, reject) => {
+  getOrders(productfbKey).then((item) => {
+    axios
+      .delete(`${dbUrl}/orders/${productfbKey}.json`)
+      .then(() => {
+        resolve(item.orderKey);
+      })
+      .catch(reject);
+  });
+});
 const createOrder = (obj, pfbKey) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/orders.json`, obj).then((response) => {
     const firebaseKey = response.data.name;
@@ -49,5 +69,10 @@ const createOrder = (obj, pfbKey) => new Promise((resolve, reject) => {
 });
 
 export {
-  getOrders, createOrder, getSingleOrder, deleteOrder,
+  getOrders,
+  createOrder,
+  getSingleOrder,
+  deleteOrder,
+  updateOrderQuantity,
+  removeOrder,
 };

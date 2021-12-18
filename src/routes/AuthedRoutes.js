@@ -10,7 +10,7 @@ export default function AuthedRoutes({ user }) {
       {/* <Route
         exact
         path="/shoppingcart"
-        component={() => <OrdersView user={user} />}
+        // component={() => <OrdersView user={user} />}
       /> */}
       <Route
         exact

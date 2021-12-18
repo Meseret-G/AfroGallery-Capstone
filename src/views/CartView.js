@@ -1,47 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { getOrders } from '../api/OrderData';
 import Cart from '../components/Cart';
-import ProductCard from '../components/ProductCards';
 
-export default function CartView() {
-  const [cartProducts, setCartProducts] = useState([]);
-  const [products, setProducts] = useEffect([]);
-  console.warn(setProducts);
+export default function CartView({ order, setOrder }) {
   useEffect(() => {
     let isMounted = true;
     getOrders().then((orderArray) => {
-      if (isMounted) setCartProducts(orderArray);
+      if (isMounted) setOrder(orderArray);
     });
     return () => {
       isMounted = false;
     };
   }, []);
+  // how do I confirm order is not an obj
 
   const addProduct = (product) => {
-    const productExist = cartProducts.find(
+    const productExist = order.find(
       (item) => item.firebaseKey === product.firebaseKey,
     );
     if (productExist) {
-      setCartProducts(
-        cartProducts.map((item) => (item.firebaseKey === product.firebaseKey
+      setOrder(
+        order.map((item) => (item.firebaseKey === product.firebaseKey
           ? { ...productExist, quantity: productExist.quantity + 1 }
           : item)),
       );
     } else {
-      setCartProducts([...cartProducts, { ...product, quantity: 1 }]);
+      setOrder([...order, { ...product, quantity: 1 }]);
     }
   };
   const removeProduct = (product) => {
-    const productExist = cartProducts.find(
+    const productExist = order.find(
       (item) => item.firebaseKey === product.firebaseKey,
     );
     if (productExist.quantity === 1) {
-      setCartProducts(
-        cartProducts.filter((item) => item.firebaseKey !== product.firebaseKey),
+      setOrder(
+        order.filter((item) => item.firebaseKey !== product.firebaseKey),
       );
     } else {
-      setCartProducts(
-        cartProducts.map((item) => (item.firebaseKey === product.firebaseKey
+      setOrder(
+        order.map((item) => (item.firebaseKey === product.firebaseKey
           ? { ...productExist, quantity: productExist.quantity - 1 }
           : item)),
       );
@@ -50,16 +48,22 @@ export default function CartView() {
 
   return (
     <div>
-      <ProductCard
+      {/* <ProductCard
         products={products}
         addProduct={addProduct}
         removeProduct={removeProduct}
-      />
+      /> */}
       <Cart
-        cartProducts={cartProducts}
+        order={order}
+        setOrder={setOrder}
         addProduct={addProduct}
         removeProduct={removeProduct}
       />
     </div>
   );
 }
+
+CartView.propTypes = {
+  order: PropTypes.func.isRequired,
+  setOrder: PropTypes.func.isRequired,
+};
