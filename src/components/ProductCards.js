@@ -13,19 +13,18 @@ import './ProductCard.scss';
 import { deleteProduct } from '../api/ProductData';
 import { createOrder, getSingleOrder } from '../api/OrderData';
 
-const initialState = {
-  firebaseKey: '',
-  uid: '',
-  name: '',
-  image: '',
-  description: '',
-  price: '',
-};
 export default function ProductCard({ product, setProducts, admin }) {
+  const initialState = {
+    firebaseKey: '',
+    name: '',
+    image: '',
+    description: '',
+    price: '',
+    uid: admin,
+  };
   const [order, setOrder] = useState(initialState);
   const { key } = useParams();
-  console.warn(order);
-
+  console.warn(admin, 'Meseret');
   useEffect(() => {
     if (key) {
       getSingleOrder(key).then((obj) => {
@@ -42,11 +41,10 @@ export default function ProductCard({ product, setProducts, admin }) {
   }, []);
 
   const addToCart = () => {
-    createOrder(order, product.firebaseKey).then(() => {
-      setOrder();
-    });
+    createOrder(order, product.firebaseKey).then(setOrder);
   };
 
+  console.warn(order, 'products');
   const handleClick = (method) => {
     if (method === 'delete') {
       deleteProduct(product.firebaseKey).then((productArray) => setProducts(productArray));
@@ -69,12 +67,12 @@ export default function ProductCard({ product, setProducts, admin }) {
           <Button className="add-cart" onClick={() => addToCart()}>
             Add To Cart
           </Button>
-          {admin && (
+          {admin !== '' && (
             <Link className="link" to={`/edit/${product.firebaseKey}`}>
               Edit
             </Link>
           )}
-          {admin && (
+          {admin !== '' && (
             <Button
               className="delete-product"
               type="button"
@@ -99,9 +97,9 @@ ProductCard.propTypes = {
     firebaseKey: PropTypes.string,
   }).isRequired,
   setProducts: PropTypes.func.isRequired,
-  admin: PropTypes.shape(PropTypes.obj),
+  admin: PropTypes.string,
 };
 
 ProductCard.defaultProps = {
-  admin: null,
+  admin: '',
 };

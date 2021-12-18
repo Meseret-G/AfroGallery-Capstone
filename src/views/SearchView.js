@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
-import { getProducts } from '../api/ProductData';
+import { getProducts, getCurrentUsersUid } from '../api/ProductData';
 import ProductCard from '../components/ProductCards';
+// import firebaseConfig from '../api/apiKeys';
 
 const SearchResult = (searchProduct, products) => {
   if (!searchProduct) {
@@ -13,6 +14,7 @@ export default function SearchView() {
   const [products, setProducts] = useState([]);
   const [searchProduct, setSearchProduct] = useState('');
   const searchWord = SearchResult(searchProduct, products);
+  const [admin, setAdmin] = useState('');
 
   useEffect(() => {
     let isMounted = true;
@@ -24,6 +26,18 @@ export default function SearchView() {
       isMounted = false;
     };
   }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (getCurrentUsersUid() === process.env.REACT_APP_ADMIN_UID) {
+      if (isMounted) setAdmin(process.env.REACT_APP_ADMIN_UID);
+      console.warn(admin, '1234');
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <>
       <div>
@@ -49,6 +63,7 @@ export default function SearchView() {
                 product={word}
                 setProducts={setProducts}
                 key={word.firebaseKey}
+                admin={admin}
               />
             ))}
           </>

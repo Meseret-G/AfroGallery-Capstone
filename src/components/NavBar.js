@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './NavBar.scss';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 // import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { signInUser, signOutUser } from '../api/auth';
+import { getUserOrder } from '../api/OrderData';
 
 export default function NavBar({ user }) {
+  const [userOrder, setUserOrder] = useState({});
+  console.warn(user, 'Aja');
+  useEffect(() => {
+    getUserOrder(user?.uid).then(setUserOrder);
+    // return () => {
+    //   cleanup;
+    // };
+  }, []);
+
   return (
     <div className="header">
       <Link className="nav-logo" href="/">
@@ -22,7 +32,13 @@ export default function NavBar({ user }) {
         <Link to="/">Home</Link>
         <Link to="/orders">Orders</Link>
         <Link to="/search">Search</Link>
-        <Link to="/shoppingcart">Shopping Cart</Link>
+        <Link
+          to={
+            userOrder !== null ? `/shoppingcart/${userOrder.firebaseKey}` : ''
+          }
+        >
+          Shopping Cart
+        </Link>
         {user ? <Link to="/paymentmethods">Payment Methods</Link> : ''}
       </div>
       {/* <div className="cart" href="/cart">
