@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import CartView from '../views/CartView';
-// import OrdersView from '../views/OrdersView';
 
 export default function AuthedRoutes({ user }) {
   return (
@@ -14,7 +13,7 @@ export default function AuthedRoutes({ user }) {
       /> */}
       <Route
         exact
-        path="/shoppingcart"
+        path="/shoppingcart/:uid"
         component={() => <CartView user={user} />}
       />
     </Switch>

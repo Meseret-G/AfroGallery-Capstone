@@ -15,7 +15,7 @@ const getCurrentUsersUid = () => firebase.auth().currentUser?.uid;
 
 const getProducts = async () => {
   const product = await axios.get(`${dbUrl}/Products.json`);
-  console.warn(product);
+
   const productData = Object.values(product.data);
   return productData;
 };

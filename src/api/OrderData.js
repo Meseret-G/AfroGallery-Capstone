@@ -14,6 +14,14 @@ const getSingleOrder = (firebaseKey) => new Promise((resolve, reject) => {
     .then((response) => resolve(response.data))
     .catch(reject);
 });
+
+const getUserOrder = (uid) => new Promise((resolve, reject) => {
+  axios
+    .get(`${dbUrl}/orders/orderBy="uid"&equalTo="${uid}".json`)
+    .then((response) => console.warn(response.data))
+    .catch(reject);
+});
+
 const deleteOrder = (firebaseKey) => new Promise((resolve, reject) => {
   axios
     .delete(`${dbUrl}/orders/${firebaseKey}.json`)
@@ -75,4 +83,5 @@ export {
   deleteOrder,
   updateOrderQuantity,
   removeOrder,
+  getUserOrder,
 };
