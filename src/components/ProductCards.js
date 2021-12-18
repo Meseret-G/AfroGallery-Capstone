@@ -24,6 +24,7 @@ const initialState = {
 export default function ProductCard({ product, setProducts, admin }) {
   const [order, setOrder] = useState(initialState);
   const { key } = useParams();
+  console.warn(order);
 
   useEffect(() => {
     if (key) {
