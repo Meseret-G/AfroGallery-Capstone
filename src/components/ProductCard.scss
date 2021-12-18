@@ -1,8 +1,9 @@
 .products {
+    display:row;
     margin: 20px auto;
     width: 80%;
-    display: flex;
-    justify-content: space-around;
+    // display: flex;
+    // justify-content: space-around;
     flex-wrap: wrap;
     border-radius: 5px;
 
@@ -16,6 +17,8 @@
     overflow: hidden;
     padding: 10px;
     margin: 40px 20px;
+    display: flex;
+
     background-color: white;
     .add-cart {
         font-weight: 700;

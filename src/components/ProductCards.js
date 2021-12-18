@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Card,
   CardTitle,
@@ -11,9 +11,11 @@ import {
 } from 'reactstrap';
 import './ProductCard.scss';
 import { deleteProduct } from '../api/ProductData';
-import { createOrder, getSingleOrder } from '../api/OrderData';
 
 export default function ProductCard({ product, setProducts, admin }) {
+
+  console.warn(admin, '12234');
+
   const initialState = {
     firebaseKey: '',
     name: '',
@@ -45,6 +47,7 @@ export default function ProductCard({ product, setProducts, admin }) {
   };
 
   console.warn(order, 'products');
+
   const handleClick = (method) => {
     if (method === 'delete') {
       deleteProduct(product.firebaseKey).then((productArray) => setProducts(productArray));
@@ -64,9 +67,12 @@ export default function ProductCard({ product, setProducts, admin }) {
             {product.description}
           </CardSubtitle>
           <CardTitle className="card-price">${product.price}</CardTitle>
+
+
           <Button className="add-cart" onClick={() => addToCart()}>
             Add To Cart
           </Button>
+
           {admin !== '' && (
             <Link className="link" to={`/edit/${product.firebaseKey}`}>
               Edit
