@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import './ProductForm.scss';
 import {
   createProduct,
   getSingleProduct,
@@ -11,7 +12,7 @@ const initialState = {
   name: '',
   image: '',
   description: '',
-  price: '',
+  details: '',
 };
 export default function ProductForm() {
   const [formInput, setFormInput] = useState(initialState);
@@ -26,7 +27,7 @@ export default function ProductForm() {
           name: obj.name,
           image: obj.image,
           description: obj.description,
-          price: obj.price,
+          details: obj.details,
         });
       });
     } else {
@@ -97,12 +98,12 @@ export default function ProductForm() {
         <div className="form-group">
           <input
             onChange={(e) => handleChange(e)}
-            value={formInput.price || ''}
+            value={formInput.details || ''}
             type="text"
-            name="price"
+            name="details"
             className="form-control"
-            id="productPrice"
-            placeholder="Product Price"
+            id="productDetail"
+            placeholder="Details"
             required
           />
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
+// import styled from 'styled-components';
 import {
   Card,
   CardTitle,
@@ -12,6 +12,11 @@ import {
 import './ProductCard.scss';
 import { deleteProduct } from '../api/ProductData';
 
+// const CardStyle = styled.div`
+//  margin: 5px;
+//  border-radius: 5px;
+// `;
+
 export default function ProductCard({ product, setProducts, admin }) {
   const handleClick = (method) => {
     if (method === 'delete') {
@@ -19,19 +24,18 @@ export default function ProductCard({ product, setProducts, admin }) {
     }
   };
   return (
-    <div className="products">
-      <Card style={{ width: '20rem' }} className="project-card">
+    <div className="product-view">
+      <Card className="product-card">
+        <CardTitle className="card-header">{product.name}</CardTitle>
         <CardImg
           src={product.image}
           alt="product image"
           className="product-image"
         />
         <CardBody>
-          <CardTitle className="card-title">{product.name}</CardTitle>
-          <CardSubtitle className="card-description">
+          <CardSubtitle className="card-title">
             {product.description}
           </CardSubtitle>
-          <CardTitle className="card-price">${product.price}</CardTitle>
           {admin !== '' && (
             <Button className="edit" href={`/edit/${product.firebaseKey}`}>
               Edit
