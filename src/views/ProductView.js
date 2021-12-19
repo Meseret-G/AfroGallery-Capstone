@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-// import firebaseConfig from '../api/apiKeys';
 import { getCurrentUsersUid, getProducts } from '../api/ProductData';
 import ProductCard from '../components/ProductCards';
 
@@ -31,7 +29,6 @@ export default function ProductView() {
   return (
     <div>
       <>
-        {admin !== '' && <Link to="/createproduct"> Create Product </Link>}
         {products.map((product) => (
           <ProductCard
             key={product.firebaseKey}

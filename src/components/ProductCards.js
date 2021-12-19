@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import {
   Card,
   CardTitle,
@@ -13,41 +13,6 @@ import './ProductCard.scss';
 import { deleteProduct } from '../api/ProductData';
 
 export default function ProductCard({ product, setProducts, admin }) {
-
-  console.warn(admin, '12234');
-
-  const initialState = {
-    firebaseKey: '',
-    name: '',
-    image: '',
-    description: '',
-    price: '',
-    uid: admin,
-  };
-  const [order, setOrder] = useState(initialState);
-  const { key } = useParams();
-  console.warn(admin, 'Meseret');
-  useEffect(() => {
-    if (key) {
-      getSingleOrder(key).then((obj) => {
-        setOrder({
-          uid: obj.uid,
-          date: obj.date,
-          name: obj.name,
-          image: obj.image,
-          description: obj.description,
-          price: obj.price,
-        });
-      });
-    }
-  }, []);
-
-  const addToCart = () => {
-    createOrder(order, product.firebaseKey).then(setOrder);
-  };
-
-  console.warn(order, 'products');
-
   const handleClick = (method) => {
     if (method === 'delete') {
       deleteProduct(product.firebaseKey).then((productArray) => setProducts(productArray));
@@ -67,17 +32,15 @@ export default function ProductCard({ product, setProducts, admin }) {
             {product.description}
           </CardSubtitle>
           <CardTitle className="card-price">${product.price}</CardTitle>
-
-
-          <Button className="add-cart" onClick={() => addToCart()}>
-            Add To Cart
+          {admin !== '' && (
+            <Button className="edit" href={`/edit/${product.firebaseKey}`}>
+              Edit
+            </Button>
+          )}
+          <Button className="details" href={`/details/${product.firebaseKey}`}>
+            Learn More
           </Button>
 
-          {admin !== '' && (
-            <Link className="link" to={`/edit/${product.firebaseKey}`}>
-              Edit
-            </Link>
-          )}
           {admin !== '' && (
             <Button
               className="delete-product"
