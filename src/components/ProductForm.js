@@ -80,12 +80,12 @@ export default function ProductForm() {
             name="image"
             className="form-control"
             id="productImage"
-            placeholder="Product Image"
+            placeholder="Image"
             required
           />
         </div>
         <div className="form-group">
-          <input
+          <textarea
             onChange={(e) => handleChange(e)}
             value={formInput.description || ''}
             type="text"
@@ -107,7 +107,7 @@ export default function ProductForm() {
             required
           />
         </div>
-        <button type="submit" className="btn btn-success">
+        <button type="submit" className="add-btn">
           {key ? 'Update' : 'Submit'}
         </button>
       </form>

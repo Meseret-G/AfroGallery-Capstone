@@ -11,3 +11,40 @@ body {
 .product-view {
     display: flex;
 }
+
+.product-form {
+  justify-content: center;
+  padding: 2em;
+  margin-top:  .5em 0;
+}
+.product-form textarea {
+  margin: .5em 0 .5em 0;
+}
+
+.add-btn {
+  justify-content: center;
+  margin-left: 35rem;
+}
+
+.form-header {
+  margin-left: 35rem;
+  padding: 2em;
+}
+
+.form-control {
+  width:80% ;
+  margin: .5em 0 .5em 0;
+}
+
+.form-container {
+  display: flex;
+  margin-top: 0.5em;
+  justify-content: center;
+}
+
+
+// .form-btn-group {
+//   // margin-top: .5em;
+//   display: flex;
+//   justify-content: center;
+// }

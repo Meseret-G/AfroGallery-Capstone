@@ -7,12 +7,12 @@ import { signInUser, signOutUser } from '../api/auth';
 export default function NavBar({ user }) {
   return (
     <div className="header">
-      <Link className="nav-logo" href="/">
+      <Link className="log-name" href="/">
         {' '}
         AFRO-GALLERY{' '}
       </Link>
       <img
-        className="logo"
+        className="logo-pic"
         alt="logo"
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG5J-4dkomOr13BirY0UqKXmQKMyXaHiHlEw&usqp=CAU"
         href="/"
