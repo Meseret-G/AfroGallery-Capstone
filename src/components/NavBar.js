@@ -14,7 +14,7 @@ export default function NavBar({ user }) {
       <img
         className="logo"
         alt="logo"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNxrCtxejReLBqJp2TG7fHcidHXbpIMDoBXQ&usqp=CAU"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG5J-4dkomOr13BirY0UqKXmQKMyXaHiHlEw&usqp=CAU"
         href="/"
       />
       <div className="nav-options">

@@ -27,7 +27,7 @@ export default function ProductView() {
   }, []);
 
   return (
-    <div>
+    <div className="product-view">
       <>
         {products.map((product) => (
           <ProductCard

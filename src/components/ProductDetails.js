@@ -13,6 +13,7 @@ export default function ProductDetails() {
   return (
     <div className="products-details">
       <h2 className="product-name">{product.name}</h2>
+      <h4 className="product-details">{product.details}</h4>
       <img className="item-pic" src={product.image} alt={product.name} />
       <p className="product-description">{product.description}</p>
     </div>
