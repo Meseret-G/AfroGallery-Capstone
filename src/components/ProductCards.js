@@ -36,25 +36,37 @@ export default function ProductCard({ product, setProducts, admin }) {
           <CardSubtitle className="card-title">
             {product.description}
           </CardSubtitle>
-          {admin !== '' && (
-            <Button className="edit" href={`/edit/${product.firebaseKey}`}>
-              Edit
-            </Button>
-          )}
-          <Button className="details" href={`/details/${product.firebaseKey}`}>
-            Learn More
-          </Button>
-
-          {admin !== '' && (
+          <CardSubtitle className="card-category">
+            {product.category}
+          </CardSubtitle>
+          <div className="card-btn-container">
+            {admin !== '' && (
+              <Button
+                className="btn btn-success"
+                href={`/edit/${product.firebaseKey}`}
+              >
+                <i className="far fa-edit" />
+              </Button>
+            )}
             <Button
-              className="delete-product"
-              type="button"
-              onClick={() => handleClick('delete')}
-              color="danger"
+              className="btn btn-primary"
+              href={`/details/${product.firebaseKey}`}
             >
-              Delete
+              <i className="far fa-file-alt" />
             </Button>
-          )}
+
+            {admin !== '' && (
+              <Button
+                className="btn btn-danger"
+                variant="primary"
+                type="button"
+                onClick={() => handleClick('delete')}
+                color="danger"
+              >
+                <i className="far fa-trash-alt" />
+              </Button>
+            )}
+          </div>
         </CardBody>
       </Card>
     </div>
@@ -65,6 +77,7 @@ ProductCard.propTypes = {
   product: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,
+    category: PropTypes.string,
     image: PropTypes.string,
     price: PropTypes.string,
     firebaseKey: PropTypes.string,

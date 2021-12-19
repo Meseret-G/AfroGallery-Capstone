@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import { getProducts, getCurrentUsersUid } from '../api/ProductData';
 import ProductCard from '../components/ProductCards';
-// import firebaseConfig from '../api/apiKeys';
+
+const CardStyle = styled.div`
+  .flexContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 2em;
+  }
+  .formStyle {
+    display: block;
+    margin: 0 auto;
+    width: 50em;
+    margin-top: 1em;
+  }
+`;
 
 const SearchResult = (searchProduct, products) => {
   if (!searchProduct) {
     return products;
   }
-  return products.filter((product) => product.name.toUpperCase().includes(searchProduct.toUpperCase()));
+  return products.filter((product) => product.category.toUpperCase().includes(searchProduct.toUpperCase()));
 };
 export default function SearchView() {
   const [products, setProducts] = useState([]);
@@ -40,37 +56,39 @@ export default function SearchView() {
 
   return (
     <>
-      <div>
-        <Form className="d-flex">
-          <FormControl
-            type="text"
-            placeholder="Search By Product Name"
-            className="me-2"
-            aria-label="Search-by-name"
-            onChange={(e) => {
-              setSearchProduct(e.target.value);
-              e.preventDefault();
-            }}
-          />
-          <Button variant="outline-success">Search</Button>
-        </Form>
-      </div>
-      <div>
-        {searchWord ? (
-          <>
-            {searchWord.map((word) => (
-              <ProductCard
-                product={word}
-                setProducts={setProducts}
-                key={word.firebaseKey}
-                admin={admin}
-              />
-            ))}
-          </>
-        ) : (
-          'NOT FOUND'
-        )}
-      </div>
+      <CardStyle>
+        <div className="formStyle">
+          <Form className="d-flex">
+            <FormControl
+              type="text"
+              placeholder="Search By Product Name"
+              className="me-2"
+              aria-label="Search-by-name"
+              onChange={(e) => {
+                setSearchProduct(e.target.value);
+                e.preventDefault();
+              }}
+            />
+            <Button variant="outline-success">Search</Button>
+          </Form>
+        </div>
+        <div className="flexContainer">
+          {searchWord ? (
+            <>
+              {searchWord.map((word) => (
+                <ProductCard
+                  product={word}
+                  setProducts={setProducts}
+                  key={word.firebaseKey}
+                  admin={admin}
+                />
+              ))}
+            </>
+          ) : (
+            'NOT FOUND'
+          )}
+        </div>
+      </CardStyle>
     </>
   );
 }
