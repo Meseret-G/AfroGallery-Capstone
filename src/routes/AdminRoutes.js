@@ -13,6 +13,9 @@ export default function AdminRoutes({ admin }) {
       <Route exact path="/createproduct">
         <ProductForm admin={admin} />
       </Route>
+      <Route exact path="/add">
+        <ProductForm admin={admin} />
+      </Route>
     </Switch>
   );
 }

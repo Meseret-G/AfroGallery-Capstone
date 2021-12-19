@@ -1,26 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './NavBar.scss';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { signInUser, signOutUser } from '../api/auth';
-import { getUserOrder } from '../api/OrderData';
 
 export default function NavBar({ user }) {
-  const [userOrder, setUserOrder] = useState({});
-  console.warn(user, 'Aja');
-  useEffect(() => {
-    getUserOrder(user?.uid).then(setUserOrder);
-    // return () => {
-    //   cleanup;
-    // };
-  }, []);
-
   return (
     <div className="header">
       <Link className="nav-logo" href="/">
         {' '}
-        Habesha MiniMart{' '}
+        AFRO-GALLERY{' '}
       </Link>
       <img
         className="logo"
@@ -30,22 +19,9 @@ export default function NavBar({ user }) {
       />
       <div className="nav-options">
         <Link to="/">Home</Link>
-        <Link to="/orders">Orders</Link>
+        <Link to="/add">Add</Link>
         <Link to="/search">Search</Link>
-        <Link
-          to={
-            userOrder !== null ? `/shoppingcart/${userOrder.firebaseKey}` : ''
-          }
-        >
-          Shopping Cart
-        </Link>
-        {user ? <Link to="/paymentmethods">Payment Methods</Link> : ''}
       </div>
-      {/* <div className="cart" href="/cart">
-        <ShoppingBasketIcon />
-        <span className="cart-count">0</span>
-      </div> */}
-
       {user ? (
         <button
           onClick={signOutUser}
