@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import ProductForm from '../components/ProductForm';
 import EditProduct from '../components/EditProduct';
+import NewProducts from '../views/NewProducts';
 
 export default function AdminRoutes({ admin }) {
   return (
@@ -10,11 +10,8 @@ export default function AdminRoutes({ admin }) {
       <Route exact path="/edit/:key">
         <EditProduct />
       </Route>
-      <Route exact path="/createproduct">
-        <ProductForm admin={admin} />
-      </Route>
       <Route exact path="/add">
-        <ProductForm admin={admin} />
+        <NewProducts admin={admin} />
       </Route>
     </Switch>
   );
