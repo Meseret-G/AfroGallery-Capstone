@@ -26,7 +26,7 @@ export default function ProductCard({ product, setProducts, admin }) {
   };
   return (
     <div className="product-view">
-      <Card className="product-card">
+      <Card className="product-card" border="light" style={{ width: '20rem' }}>
         <CardTitle className="item-title-header">{product.name}</CardTitle>
         <CardImg
           src={product.image}
@@ -37,6 +37,7 @@ export default function ProductCard({ product, setProducts, admin }) {
           <CardSubtitle className="card-title">
             {product.description}
           </CardSubtitle>
+
           <div className="card-btn-container">
             {admin !== '' && (
               <Link
@@ -55,8 +56,7 @@ export default function ProductCard({ product, setProducts, admin }) {
 
             {admin !== '' && (
               <Button
-                className="delete"
-                variant="primary"
+                className="btn btn-delete"
                 type="button"
                 onClick={() => handleClick('delete')}
               >
