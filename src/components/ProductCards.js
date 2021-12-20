@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 // import styled from 'styled-components';
 import {
   Card,
@@ -36,28 +37,25 @@ export default function ProductCard({ product, setProducts, admin }) {
           <CardSubtitle className="card-title">
             {product.description}
           </CardSubtitle>
-          <CardSubtitle className="card-category">
-            {product.category}
-          </CardSubtitle>
           <div className="card-btn-container">
             {admin !== '' && (
-              <Button
-                className="btn btn-success"
-                href={`/edit/${product.firebaseKey}`}
+              <Link
+                className="btn btn-edit"
+                to={`/edit/${product.firebaseKey}`}
               >
                 <i className="far fa-edit" />
-              </Button>
+              </Link>
             )}
-            <Button
-              className="btn btn-primary"
-              href={`/details/${product.firebaseKey}`}
+            <Link
+              className="btn btn-details"
+              to={`/details/${product.firebaseKey}`}
             >
               <i className="far fa-file-alt" />
-            </Button>
+            </Link>
 
             {admin !== '' && (
               <Button
-                className="btn btn-danger"
+                className="btn btn-delete"
                 variant="primary"
                 type="button"
                 onClick={() => handleClick('delete')}

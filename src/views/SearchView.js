@@ -24,7 +24,7 @@ const SearchResult = (searchProduct, products) => {
   if (!searchProduct) {
     return products;
   }
-  return products.filter((product) => product.category.toUpperCase().includes(searchProduct.toUpperCase()));
+  return products.filter((product) => product.name.toUpperCase().includes(searchProduct.toUpperCase()));
 };
 export default function SearchView() {
   const [products, setProducts] = useState([]);
@@ -61,7 +61,7 @@ export default function SearchView() {
           <Form className="d-flex">
             <FormControl
               type="text"
-              placeholder="Search By Product Name"
+              placeholder="Search By Name"
               className="me-2"
               aria-label="Search-by-name"
               onChange={(e) => {
@@ -69,7 +69,12 @@ export default function SearchView() {
                 e.preventDefault();
               }}
             />
-            <Button variant="outline-success">Search</Button>
+            <Button
+              variant="outline-secondary"
+              style={{ width: '5rem', height: '3rem', padding: '.5rem' }}
+            >
+              Search
+            </Button>
           </Form>
         </div>
         <div className="flexContainer">

@@ -1,53 +1,93 @@
-import React from 'react';
-import './NavBar.scss';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { signInUser, signOutUser } from '../api/auth';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
+import { signOutUser } from '../api/auth';
 
-export default function NavBar({ user }) {
+const GalNavbar = ({ user }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
+
   return (
-    <div className="header">
-      <Link className="log-name" href="/">
-        {' '}
-        AFRO-GALLERY{' '}
-      </Link>
-      <img
-        className="logo-pic"
-        alt="logo"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG5J-4dkomOr13BirY0UqKXmQKMyXaHiHlEw&usqp=CAU"
-        href="/"
-      />
-      <div className="nav-options">
-        <Link to="/">Home</Link>
-        <Link to="/add">Add</Link>
-        <Link to="/search">Search</Link>
-      </div>
-      {user ? (
-        <button
-          onClick={signOutUser}
-          className="btn btn-primary"
-          type="button"
-          href="/sign-in"
-        >
-          Sign Out
-        </button>
-      ) : (
-        <button
-          onClick={signInUser}
-          className="btn btn-secondary"
-          type="button"
-          href="/sign-in"
-        >
-          Sign In
-        </button>
-      )}
+    <div>
+      <Navbar className="navbar" light expand="md">
+        <NavbarBrand className="nav-logo" href="/" style={{ color: 'white' }}>
+          Afro Galley
+        </NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="container-fluid" navbar>
+            {user ? (
+              <>
+                <NavItem>
+                  <NavLink href="/" style={{ color: 'white' }}>
+                    Home
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/add" style={{ color: 'white' }}>
+                    New
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/search" style={{ color: 'white' }}>
+                    Search
+                  </NavLink>
+                </NavItem>
+                <UncontrolledDropdown className="user-menu" nav inNavbar>
+                  <DropdownToggle nav caret>
+                    <img
+                      className="user-img"
+                      src={user.profilePic}
+                      alt="user"
+                    />
+                    {user.user}
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                      <NavLink className="sign-out-user" onClick={signOutUser}>
+                        Sign Out
+                      </NavLink>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              </>
+            ) : (
+              ''
+            )}
+          </Nav>
+        </Collapse>
+      </Navbar>
     </div>
   );
-}
-
-NavBar.propTypes = {
-  user: PropTypes.shape(PropTypes.obj),
 };
-NavBar.defaultProps = {
+
+GalNavbar.defaultProps = {
   user: null,
 };
+
+GalNavbar.propTypes = {
+  user: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      fullName: PropTypes.string,
+      profilePic: PropTypes.string,
+      uid: PropTypes.string,
+      user: PropTypes.string,
+    }),
+  ]),
+};
+
+export default GalNavbar;

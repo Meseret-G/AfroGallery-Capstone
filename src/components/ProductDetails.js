@@ -12,10 +12,19 @@ export default function ProductDetails() {
 
   return (
     <div className="products-details">
-      <h2 className="product-name">{product.name}</h2>
-      <h4 className="product-details">{product.details}</h4>
-      <img className="item-pic" src={product.image} alt={product.name} />
-      <p className="product-description">{product.description}</p>
+      <h3 style={{ color: 'white' }}> Learn More...</h3>
+      <h2 className="product-name" style={{ color: 'white' }}>
+        {product.name}
+      </h2>
+      <img
+        className="item-details-img"
+        style={{ color: 'white' }}
+        src={product.image}
+        alt={product.name}
+      />
+      <h4 className="product-details" style={{ color: 'white' }}>
+        {product.details}
+      </h4>
     </div>
   );
 }

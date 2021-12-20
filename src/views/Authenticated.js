@@ -8,7 +8,7 @@ export default function Authenticated({ user }) {
       <h1>Welcome, {user.fullName}!</h1>
       <img src={user.photo} alt={user.fullName} />
       <div className="mt-2">
-        <button type="button" className="btn btn-danger" onClick={signOutUser}>
+        <button type="button" className="signout-btn" onClick={signOutUser}>
           Sign Out
         </button>
       </div>
