@@ -85,7 +85,7 @@ export default function ProductForm() {
           />
         </div>
         <div className="form-group">
-          <textarea
+          <input
             onChange={(e) => handleChange(e)}
             value={formInput.description || ''}
             type="text"
@@ -96,7 +96,7 @@ export default function ProductForm() {
           />
         </div>
         <div className="form-group">
-          <input
+          <textarea
             onChange={(e) => handleChange(e)}
             value={formInput.details || ''}
             type="text"

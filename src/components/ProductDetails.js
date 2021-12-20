@@ -12,7 +12,7 @@ export default function ProductDetails() {
 
   return (
     <div className="products-details">
-      <h3 style={{ color: 'white' }}> Learn More...</h3>
+      <h2 style={{ color: 'white' }}> Learn More...</h2>
       <h2 className="product-name" style={{ color: 'white' }}>
         {product.name}
       </h2>

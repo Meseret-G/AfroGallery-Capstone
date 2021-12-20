@@ -27,7 +27,7 @@ export default function ProductCard({ product, setProducts, admin }) {
   return (
     <div className="product-view">
       <Card className="product-card">
-        <CardTitle className="card-header">{product.name}</CardTitle>
+        <CardTitle className="item-title-header">{product.name}</CardTitle>
         <CardImg
           src={product.image}
           alt="product image"
@@ -55,11 +55,10 @@ export default function ProductCard({ product, setProducts, admin }) {
 
             {admin !== '' && (
               <Button
-                className="btn btn-delete"
+                className="delete"
                 variant="primary"
                 type="button"
                 onClick={() => handleClick('delete')}
-                color="danger"
               >
                 <i className="far fa-trash-alt" />
               </Button>
