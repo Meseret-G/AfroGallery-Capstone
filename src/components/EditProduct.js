@@ -12,7 +12,9 @@ export default function EditProduct() {
   }, []);
   return (
     <>
-      <h1 className="page-header">Edit Product</h1>
+      <h3 className="edit-view" style={{ color: 'white' }}>
+        Edit Item
+      </h3>
       <div className="form-container">
         <ProductForm user={editItem} />
       </div>
