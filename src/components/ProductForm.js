@@ -10,7 +10,6 @@ import {
 const initialState = {
   firebaseKey: '',
   name: '',
-  category: '',
   image: '',
   description: '',
   details: '',
@@ -26,7 +25,6 @@ export default function ProductForm() {
         setFormInput({
           firebaseKey: obj.firebaseKey,
           name: obj.name,
-          category: obj.category,
           image: obj.image,
           description: obj.description,
           details: obj.details,
@@ -72,17 +70,6 @@ export default function ProductForm() {
             className="form-control"
             id="productName"
             placeholder="Title"
-          />
-        </div>
-        <div className="form-group">
-          <input
-            onChange={(e) => handleChange(e)}
-            value={formInput.category || ''}
-            type="text"
-            name="category"
-            className="form-control"
-            id="productCategory"
-            placeholder="Category"
           />
         </div>
         <div className="form-group">

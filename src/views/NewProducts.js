@@ -5,7 +5,7 @@ import ProductForm from '../components/ProductForm';
 export default function NewProducts({ user }) {
   return (
     <>
-      <h3 className="form-header">Add A New Item </h3>
+      <h3 className="form-view-header">Add A New Item </h3>
       <div className="form-container">
         <ProductForm admin={user} />
       </div>

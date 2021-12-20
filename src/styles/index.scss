@@ -2,9 +2,50 @@
 @import 'globals';
 
 body {
-  background-color: goldenrod!important;
+  background-color: rgb(42, 41, 38)!important;
   margin: 0;
   padding: 0;
+}
+// Navbar
+.navbar {
+  background-color: gray;
+  color:white;
+  font-size: 1.1em;
+}
+
+.nav-logo {
+  // font-family: "Forgotten Junk";
+  margin-left: .5em;
+  font-weight: 500;
+  font-size:1000;
+
+}
+
+.user-img {
+  width: 2em;
+  margin: -1em .5em -1em 0;
+  border: 1px transparent;
+  border-radius: 100px;
+}
+
+.dropdown-menu.show {
+  margin-left: 1em;
+  background-color: #f8f9fa;
+  margin-top: .46em;
+}
+
+.dropdown-menu.show .nav-link {
+  color:darkred;
+  height: 2em;
+  width: 1.5rem;
+  text-align: center;
+  margin-top: -1em;
+  line-height: 2em;
+}
+
+.user-menu {
+  margin-left: auto;
+  margin-right: 1em;
 }
 
 // Products View
@@ -61,10 +102,39 @@ body {
   width: 80px;
   height: 40px;
 }
+.card-btn-container {
+  margin: auto 0 1em 0
+}
 
+// Details View
+.products-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em 5em 0 5em;
+  padding: 5em 0 5em 0;
+}
 
-// .form-btn-group {
-//   // margin-top: .5em;
-//   display: flex;
-//   justify-content: center;
-// }
+.item-details-img {
+  width: 30em;
+  height: fit-content;
+  margin-bottom: 2em;
+}
+.form-view-header {
+  color:white;
+  margin-left: 40rem;
+  padding-top: 4rem;
+}
+.add-btn {
+  width: 80px;
+  height: 40px;
+}
+.signout-btn {
+  width: 20px;
+  height: 40px; 
+}
+.welcome-page {
+  color:white;
+  margin-left: 4rem;
+  padding-top: 2rem;
+}
